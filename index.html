@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hướng Dẫn Sinh Con - Bệnh Viện Makita</title>
+<style>
+:root {
+  --pink: #f8a5c2;
+  --pink-dark: #e84393;
+  --pink-light: #fde8f0;
+  --green: #55b47d;
+  --green-light: #e8f5ee;
+  --blue: #5b9bd5;
+  --blue-light: #e8f1fb;
+  --yellow: #f7c948;
+  --yellow-light: #fef9e7;
+  --purple: #9b59b6;
+  --purple-light: #f5eef8;
+  --white: #ffffff;
+  --gray: #6c757d;
+  --light: #f8f9fa;
+  --dark: #2d3436;
+  --radius: 16px;
+  --shadow: 0 8px 32px rgba(0,0,0,0.10);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Segoe UI', sans-serif; background: #fff9fc; color: var(--dark); line-height: 1.7; }
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, #fde8f0 0%, #fff9fc 50%, #e8f5ee 100%);
+  padding: 60px 20px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero h1 { font-size: 2.4rem; color: var(--pink-dark); font-weight: 800; margin-bottom: 8px; }
+.hero h2 { font-size: 1.1rem; color: var(--gray); margin-bottom: 20px; font-weight: 400; }
+.hero .badge { display: inline-block; background: var(--pink-dark); color: #fff; border-radius: 20px; padding: 6px 20px; font-size: 0.9rem; margin: 4px; }
+.hero .badge.green { background: var(--green); }
+.hero .badge.blue { background: var(--blue); }
+.petals { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; }
+.petal {
+  position: absolute; width: 18px; height: 18px;
+  background: radial-gradient(circle, #f8a5c2 60%, #fde8f0 100%);
+  border-radius: 50% 0 50% 0; opacity: 0.7;
+  animation: fall linear infinite;
+}
+@keyframes fall {
+  0% { transform: translateY(-30px) rotate(0deg); opacity: 0.8; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(8px);
+  border-bottom: 2px solid var(--pink-light);
+  padding: 10px 20px;
+  display: flex; gap: 6px; flex-wrap: wrap; justify-content: center;
+}
+nav a {
+  text-decoration: none; color: var(--dark); font-size: 0.82rem;
+  padding: 6px 12px; border-radius: 20px; transition: all 0.2s;
+  border: 1px solid transparent;
+}
+nav a:hover { background: var(--pink-light); border-color: var(--pink); color: var(--pink-dark); }
+
+/* SECTION */
+section { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+.section-title {
+  font-size: 1.5rem; font-weight: 800; margin-bottom: 24px;
+  display: flex; align-items: center; gap: 10px;
+  color: var(--dark);
+}
+.section-title .icon { font-size: 1.8rem; }
+.divider { height: 4px; border-radius: 2px; margin: 0 0 32px; }
+.divider.pink { background: linear-gradient(90deg, var(--pink-dark), var(--pink-light)); }
+.divider.green { background: linear-gradient(90deg, var(--green), var(--green-light)); }
+.divider.blue { background: linear-gradient(90deg, var(--blue), var(--blue-light)); }
+.divider.yellow { background: linear-gradient(90deg, var(--yellow), var(--yellow-light)); }
+.divider.purple { background: linear-gradient(90deg, var(--purple), var(--purple-light)); }
+
+/* CARD */
+.card {
+  background: #fff; border-radius: var(--radius);
+  box-shadow: var(--shadow-sm); padding: 24px;
+  margin-bottom: 20px; border-left: 5px solid var(--pink);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+.card.green { border-left-color: var(--green); }
+.card.blue { border-left-color: var(--blue); }
+.card.yellow { border-left-color: var(--yellow); }
+.card.purple { border-left-color: var(--purple); }
+
+/* CHECKLIST */
+.checklist { list-style: none; }
+.checklist li {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 0; border-bottom: 1px dashed #f0e0e8;
+  cursor: pointer; transition: background 0.15s; border-radius: 8px;
+  padding-left: 4px;
+}
+.checklist li:last-child { border-bottom: none; }
+.checklist li:hover { background: var(--pink-light); padding-left: 8px; }
+.checklist li input[type=checkbox] { width: 20px; height: 20px; accent-color: var(--pink-dark); cursor: pointer; flex-shrink: 0; margin-top: 2px; }
+.checklist li.done span { text-decoration: line-through; color: #aaa; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 40px; }
+.timeline::before { content: ''; position: absolute; left: 16px; top: 0; bottom: 0; width: 3px; background: linear-gradient(to bottom, var(--pink), var(--green)); border-radius: 2px; }
+.timeline-item { position: relative; margin-bottom: 28px; }
+.timeline-dot {
+  position: absolute; left: -31px; top: 4px;
+  width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; color: #fff; font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.timeline-dot.pink { background: var(--pink-dark); }
+.timeline-dot.green { background: var(--green); }
+.timeline-dot.blue { background: var(--blue); }
+.timeline-dot.yellow { background: var(--yellow); color: #333; }
+.timeline-dot.purple { background: var(--purple); }
+.timeline-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 6px; }
+.timeline-body { color: #555; font-size: 0.95rem; }
+
+/* ALERT BOX */
+.alert {
+  border-radius: 12px; padding: 16px 20px; margin: 16px 0;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.alert.danger { background: #fdf0f0; border-left: 4px solid #e74c3c; }
+.alert.warning { background: #fff8e1; border-left: 4px solid var(--yellow); }
+.alert.info { background: var(--blue-light); border-left: 4px solid var(--blue); }
+.alert.success { background: var(--green-light); border-left: 4px solid var(--green); }
+.alert .alert-icon { font-size: 1.4rem; flex-shrink: 0; }
+.alert-text strong { display: block; margin-bottom: 4px; }
+
+/* PRICE TABLE */
+.price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+.price-card {
+  border-radius: 14px; padding: 24px; text-align: center;
+  box-shadow: var(--shadow-sm); transition: transform 0.2s;
+}
+.price-card:hover { transform: scale(1.03); }
+.price-card.basic { background: linear-gradient(135deg, #e8f5ee, #d4efdf); border: 2px solid var(--green); }
+.price-card.premium { background: linear-gradient(135deg, #fde8f0, #f9c6d8); border: 2px solid var(--pink-dark); }
+.price-card .room-icon { font-size: 3rem; margin-bottom: 8px; }
+.price-card .room-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+.price-card .room-price { font-size: 2rem; font-weight: 900; color: var(--pink-dark); }
+.price-card.basic .room-price { color: var(--green); }
+.price-card .room-unit { font-size: 0.85rem; color: #777; margin-top: 4px; }
+
+/* DISEASE GRID */
+.disease-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; margin: 16px 0; }
+.disease-card {
+  background: #fff; border-radius: 12px; padding: 16px;
+  box-shadow: var(--shadow-sm); text-align: center;
+  border-top: 4px solid var(--purple);
+}
+.disease-card .d-icon { font-size: 2rem; margin-bottom: 6px; }
+.disease-card .d-name { font-weight: 700; font-size: 0.9rem; color: var(--purple); margin-bottom: 4px; }
+.disease-card .d-full { font-size: 0.78rem; color: #888; }
+
+/* CONTACT BOX */
+.contact-box {
+  background: linear-gradient(135deg, var(--pink-dark), #c0392b);
+  color: #fff; border-radius: 20px; padding: 32px;
+  text-align: center; box-shadow: 0 8px 32px rgba(232,67,147,0.3);
+}
+.contact-box .phone { font-size: 2.8rem; font-weight: 900; letter-spacing: 2px; margin: 12px 0; }
+.contact-box .phone-label { font-size: 1rem; opacity: 0.9; }
+
+/* INFO STEPS */
+.steps { display: flex; flex-direction: column; gap: 0; }
+.step-item { display: flex; gap: 16px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid #f0e0e8; }
+.step-item:last-child { border-bottom: none; }
+.step-num {
+  width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 1rem; color: #fff;
+  background: linear-gradient(135deg, var(--pink-dark), var(--purple));
+}
+.step-content .step-title { font-weight: 700; margin-bottom: 4px; }
+.step-content .step-body { font-size: 0.93rem; color: #555; }
+
+/* KANGAROO VISUAL */
+.kangaroo-visual {
+  background: linear-gradient(135deg, var(--pink-light), #fff9fc);
+  border-radius: 20px; padding: 32px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.kangaroo-visual svg { max-width: 300px; }
+
+/* BADGE ROW */
+.badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.tag {
+  background: var(--pink-light); color: var(--pink-dark);
+  border-radius: 20px; padding: 4px 14px; font-size: 0.83rem; font-weight: 600;
+  border: 1px solid var(--pink);
+}
+.tag.green { background: var(--green-light); color: var(--green); border-color: var(--green); }
+.tag.blue { background: var(--blue-light); color: var(--blue); border-color: var(--blue); }
+.tag.purple { background: var(--purple-light); color: var(--purple); border-color: var(--purple); }
+
+/* GRID 2 */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+
+/* STAT BOX */
+.stat-box {
+  background: #fff; border-radius: 14px; padding: 20px;
+  text-align: center; box-shadow: var(--shadow-sm);
+}
+.stat-box .stat-num { font-size: 2.2rem; font-weight: 900; color: var(--pink-dark); }
+.stat-box .stat-label { font-size: 0.85rem; color: #888; margin-top: 4px; }
+
+/* BIRTH PLAN */
+.birthplan-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+.bp-item {
+  background: #fff; border-radius: 12px; padding: 18px;
+  box-shadow: var(--shadow-sm); display: flex; gap: 14px; align-items: flex-start;
+  border-left: 4px solid var(--yellow);
+}
+.bp-item .bp-icon { font-size: 1.8rem; flex-shrink: 0; }
+.bp-item .bp-label { font-weight: 700; color: #333; font-size: 0.95rem; margin-bottom: 8px; }
+.bp-item .bp-input {
+  width: 100%; border: 1px dashed #ddd; border-radius: 8px;
+  padding: 8px 12px; font-size: 0.9rem; background: #fffdf5;
+  resize: none; font-family: inherit; min-height: 60px;
+}
+.bp-item .bp-input:focus { outline: none; border-color: var(--yellow); background: #fff; }
+
+/* WEEK36 */
+.week36 {
+  background: linear-gradient(135deg, #fff8e1, #fef9e7);
+  border-radius: 16px; padding: 24px; border: 2px solid var(--yellow);
+}
+.week36 h3 { color: #e67e22; font-size: 1.2rem; margin-bottom: 16px; }
+.progress-check { margin: 8px 0; display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.progress-check input { accent-color: #e67e22; width: 18px; height: 18px; }
+.progress-check label { font-size: 0.93rem; cursor: pointer; }
+
+/* TIMING CARD */
+.timing-card {
+  background: linear-gradient(135deg, #fff, var(--pink-light));
+  border-radius: 14px; padding: 20px; margin-bottom: 14px;
+  border: 1px solid var(--pink); display: flex; gap: 14px;
+}
+.timing-card .t-icon { font-size: 2.2rem; flex-shrink: 0; }
+.timing-card .t-title { font-weight: 800; color: var(--pink-dark); font-size: 1rem; margin-bottom: 6px; }
+.timing-card .t-body { font-size: 0.92rem; color: #555; }
+.timing-card.warning-card { border-color: #e74c3c; background: linear-gradient(135deg, #fff, #fdf0f0); }
+.timing-card.warning-card .t-title { color: #e74c3c; }
+
+/* FLOW DIAGRAM */
+.flow { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 20px 0; }
+.flow-node {
+  background: var(--blue); color: #fff; border-radius: 10px;
+  padding: 10px 16px; font-size: 0.85rem; font-weight: 600; text-align: center;
+}
+.flow-node.green { background: var(--green); }
+.flow-node.pink { background: var(--pink-dark); }
+.flow-node.purple { background: var(--purple); }
+.flow-arrow { font-size: 1.4rem; color: #aaa; }
+
+/* FOOTER */
+footer {
+  background: var(--dark); color: #ccc; text-align: center;
+  padding: 32px 20px; margin-top: 60px; font-size: 0.88rem;
+}
+footer strong { color: #fff; }
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.6rem; }
+  .price-grid { grid-template-columns: 1fr; }
+  .grid2 { grid-template-columns: 1fr; }
+  .grid3 { grid-template-columns: 1fr 1fr; }
+  .flow { flex-direction: column; align-items: flex-start; }
+  .contact-box .phone { font-size: 1.9rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- PETALS -->
+<div class="petals" id="petals"></div>
+
+<!-- HERO -->
+<div class="hero">
+  <div style="font-size:4rem; margin-bottom:10px;">🌸</div>
+  <h1>Hướng Dẫn Sinh Con</h1>
+  <h2>Bệnh Viện Tổng Hợp Makita · 牧田総合病院 · Tokyo</h2>
+  <p style="color:#888;font-size:0.9rem;margin-bottom:16px;">〒144-8501 Ota-ku, Nishikamata 8-7-20 · Tel: 03-6428-7500</p>
+  <span class="badge">🌸 Tài liệu tiếng Việt</span>
+  <span class="badge green">✅ 28 trang gốc</span>
+  <span class="badge blue">📋 15 mục hướng dẫn</span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#giay-to">📄 Giấy tờ</a>
+  <a href="#nhap-vien">🏥 Nhập viện</a>
+  <a href="#phong">🛏 Phòng & Phí</a>
+  <a href="#birthplan">💝 Birth Plan</a>
+  <a href="#kangaroo">👶 Kangaroo</a>
+  <a href="#sang-loc">🔬 Sàng lọc</a>
+  <a href="#do-mang">🎒 Đồ mang</a>
+  <a href="#do-be">🍼 Đồ bé</a>
+  <a href="#tuan36">📅 Tuần 36</a>
+  <a href="#lien-lac">📞 Liên lạc</a>
+  <a href="#tokyo-baby">🎁 Tokyo Baby First</a>
+</nav>
+
+<!-- 1. GIẤY TỜ -->
+<section id="giay-to">
+  <div class="section-title"><span class="icon">📄</span> Giấy Tờ Cần Mang Khi Nhập Viện</div>
+  <div class="divider pink"></div>
+
+  <div class="alert info">
+    <span class="alert-icon">💡</span>
+    <div class="alert-text"><strong>Chuẩn bị trước khi nhập viện</strong>Hãy ký tên, đóng dấu vào tất cả giấy tờ bên dưới trước khi đến bệnh viện. Tích ✓ vào từng mục khi đã chuẩn bị xong.</div>
+  </div>
+
+  <div class="card">
+    <ul class="checklist" id="docs-list">
+      <li onclick="toggle(this)"><input type="checkbox"> <span>Đồng ý thư tổng hợp — <strong>2 bản</strong></span></li>
+      <li onclick="toggle(this)"><input type="checkbox"> <span>Đơn yêu cầu phẫu thuật khẩn cấp khi sinh — <strong>1 bản</strong></span></li>
+      <li onclick="toggle(this)"><input type="checkbox"> <span>Đồng ý thư tiếp xúc da sơ sinh giai đoạn sớm — <strong>2 bản</strong></span></li>
+      <li onclick="toggle(this)"><input type="checkbox"> <span>Đơn đăng ký + Đồng ý thư sàng lọc thính lực sơ sinh (ABR) — <strong>2 bản</strong></span></li>
+      <li onclick="toggle(this)"><input type="checkbox"> <span>Phiếu nhận khám thính lực (phiếu hỗ trợ) — <strong>1 bản</strong> <em style="color:#e84393">(ghi trong khung đậm)</em></span></li>
+      <li onclick="toggle(this)"><input type="checkbox"> <span>Phiếu lấy máu xét nghiệm rối loạn chuyển hóa bẩm sinh <em style="color:#e84393">(ghi trong khung đậm)</em></span></li>
+      <li onclick="toggle(this)"><input type="checkbox"> <span>Đồng ý thư sàng lọc sơ sinh & cung cấp dữ liệu Cục Gia đình</span></li>
+      <li onclick="toggle(this)"><input type="checkbox"> <span>Đồng ý thư hướng dẫn nhập viện — <strong>1 bản</strong></span></li>
+      <li onclick="toggle(this)"><input type="checkbox"> <span>Đơn nhập viện</span></li>
+      <li onclick="toggle(this)"><input type="checkbox"> <span>Kế hoạch sinh (Birth Plan)</span></li>
+      <li onclick="toggle(this)"><input type="checkbox"> <span>Bộ giấy tờ phẫu thuật — <em>(chỉ dành cho người dự kiến mổ lấy thai)</em></span></li>
+    </ul>
+  </div>
+
+  <div class="alert warning">
+    <span class="alert-icon">⚠️</span>
+    <div class="alert-text">
+      <strong>Lưu ý quan trọng</strong>
+      • Phần có khung đậm: ghi cẩn thận trong khung<br>
+      • Tên người giám hộ: ghi <strong>tên bản thân bệnh nhân</strong><br>
+      • Giấy tờ có quan hệ thân tộc: ghi <strong>tên chồng hoặc bạn đời</strong>
+    </div>
+  </div>
+</section>
+
+<!-- 2. NHẬP VIỆN TIMING -->
+<section id="nhap-vien" style="background: linear-gradient(180deg, #fff9fc 0%, #f0f8ff 100%); max-width:100%; padding: 40px 0;">
+<div style="max-width:900px;margin:0 auto;padding:0 20px;">
+  <div class="section-title"><span class="icon">🏥</span> Khi Nào Cần Đến Bệnh Viện?</div>
+  <div class="divider green"></div>
+
+  <div class="timing-card">
+    <div class="t-icon">🤱</div>
+    <div>
+      <div class="t-title">① Đau bụng đẻ (Cơn co tử cung)</div>
+      <div class="t-body">Cơn đau bụng đều đặn, mỗi lần mạnh hơn — có thể là dấu hiệu chuyển dạ.</div>
+      <div class="badge-row" style="margin-top:10px;">
+        <span class="tag">Sinh lần đầu: cách 10 phút → gọi điện</span>
+        <span class="tag green">Đã sinh rồi: cách 15 phút → gọi điện</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="timing-card warning-card">
+    <div class="t-icon">💧</div>
+    <div>
+      <div class="t-title">② Vỡ nước ối — Đến viện NGAY</div>
+      <div class="t-body">Nước ối chảy ra không dừng, khó phân biệt → đến viện ngay.</div>
+      <div class="alert danger" style="margin-top:10px;">
+        <span class="alert-icon">🚨</span>
+        <div class="alert-text">Khi vỡ ối: <strong>KHÔNG tắm, KHÔNG ngâm bồn</strong> — đặt băng sạch và đến viện ngay!</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="timing-card">
+    <div class="t-icon">🩸</div>
+    <div>
+      <div class="t-title">③ Ra máu như ngày đầu kinh</div>
+      <div class="t-body">Máu chảy liên tục, có cục máu đông → đến viện ngay. Lượng nhỏ dính băng là bình thường.</div>
+    </div>
+  </div>
+
+  <div class="timing-card">
+    <div class="t-icon">👣</div>
+    <div>
+      <div class="t-title">④ Thai ít hoặc không động</div>
+      <div class="t-body">Nằm nghiêng trái, thư giãn, tập trung cảm nhận 1–2 tiếng. Nếu em bé không cử động gì → liên hệ bệnh viện.</div>
+    </div>
+  </div>
+
+  <div class="grid2" style="margin-top:8px;">
+    <div class="timing-card" style="margin-bottom:0;">
+      <div class="t-icon">🤰</div>
+      <div><div class="t-title">⑤ Bụng cứng căng liên tục</div></div>
+    </div>
+    <div class="timing-card" style="margin-bottom:0;">
+      <div class="t-icon">😣</div>
+      <div><div class="t-title">⑥ Đau bụng dưới kéo dài</div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- 3. PHÒNG & PHÍ -->
+<section id="phong">
+  <div class="section-title"><span class="icon">🛏</span> Loại Phòng & Chi Phí</div>
+  <div class="divider blue"></div>
+
+  <div class="alert info">
+    <span class="alert-icon">ℹ️</span>
+    <div class="alert-text"><strong>Lưu ý:</strong> Bệnh viện không có phòng miễn phí phụ trội. Mọi loại phòng đều phát sinh phí bổ sung hàng ngày.</div>
+  </div>
+
+  <div class="price-grid">
+    <div class="price-card basic">
+      <div class="room-icon">🏠</div>
+      <div class="room-name">Phòng 4 Người</div>
+      <div class="room-price">4.840¥</div>
+      <div class="room-unit">/ ngày (đã gồm thuế)</div>
+      <div style="margin-top:12px;font-size:0.88rem;color:#555;">Phòng chung, chia sẻ với 3 người khác</div>
+    </div>
+    <div class="price-card premium">
+      <div class="room-icon">🌟</div>
+      <div class="room-name">Phòng Riêng (Cá Nhân)</div>
+      <div class="room-price">20.570¥</div>
+      <div class="room-unit">/ ngày (đã gồm thuế)</div>
+      <div style="margin-top:12px;font-size:0.88rem;color:#555;">Phòng riêng tư, yên tĩnh hơn</div>
+    </div>
+  </div>
+
+  <!-- Bar chart minh họa -->
+  <div class="card" style="margin-top:8px;">
+    <div style="font-weight:700;margin-bottom:16px;">📊 So sánh phí phòng (7 ngày nằm viện ước tính)</div>
+    <div style="margin-bottom:12px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+        <span style="width:80px;font-size:0.85rem;color:#555;">4 người</span>
+        <div style="flex:1;background:#e8f5ee;border-radius:20px;height:32px;position:relative;overflow:hidden;">
+          <div style="width:24%;background:var(--green);height:100%;border-radius:20px;transition:width 1s;display:flex;align-items:center;padding-left:10px;color:#fff;font-weight:700;font-size:0.85rem;">33.880¥</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="width:80px;font-size:0.85rem;color:#555;">Riêng</span>
+        <div style="flex:1;background:#fde8f0;border-radius:20px;height:32px;position:relative;overflow:hidden;">
+          <div style="width:100%;background:var(--pink-dark);height:100%;border-radius:20px;display:flex;align-items:center;padding-left:10px;color:#fff;font-weight:700;font-size:0.85rem;">143.990¥</div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:0.8rem;color:#aaa;">*Ước tính cho 7 ngày — không bao gồm viện phí, thuốc, dịch vụ khác</div>
+  </div>
+</section>
+
+<!-- 4. BIRTH PLAN -->
+<section id="birthplan" style="background:#fffdf5;max-width:100%;padding:40px 0;">
+<div style="max-width:900px;margin:0 auto;padding:0 20px;">
+  <div class="section-title"><span class="icon">💝</span> Kế Hoạch Sinh (Birth Plan)</div>
+  <div class="divider yellow"></div>
+
+  <div class="alert success">
+    <span class="alert-icon">💌</span>
+    <div class="alert-text"><strong>Viết tự do những mong muốn của bạn!</strong> Bạn muốn trải qua quá trình sinh như thế nào — hãy ghi lại để đội y tế hiểu và hỗ trợ bạn tốt nhất.</div>
+  </div>
+
+  <div class="birthplan-grid">
+    <div class="bp-item">
+      <div class="bp-icon">🏨</div>
+      <div style="flex:1;">
+        <div class="bp-label">⭐ Sau khi nhập viện, tôi muốn...</div>
+        <textarea class="bp-input" placeholder="Ví dụ: Được ở bên bạn đời, được nghe nhạc nhẹ, ánh sáng dịu..."></textarea>
+      </div>
+    </div>
+    <div class="bp-item">
+      <div class="bp-icon">❤️</div>
+      <div style="flex:1;">
+        <div class="bp-label">⭐ Khi sinh, tôi muốn...</div>
+        <textarea class="bp-input" placeholder="Ví dụ: Được tự chọn tư thế, được bạn đời nắm tay, dùng phương pháp thở..."></textarea>
+      </div>
+    </div>
+    <div class="bp-item">
+      <div class="bp-icon">🎉</div>
+      <div style="flex:1;">
+        <div class="bp-label">⭐ Sau khi bé chào đời, tôi muốn...</div>
+        <textarea class="bp-input" placeholder="Ví dụ: Được da kề da với bé ngay, được thử cho bú sớm, chụp ảnh gia đình..."></textarea>
+      </div>
+    </div>
+    <div class="bp-item">
+      <div class="bp-icon">🍼</div>
+      <div style="flex:1;">
+        <div class="bp-label">⭐ Về nuôi con sau sinh...</div>
+        <textarea class="bp-input" placeholder="Ví dụ: Muốn cho bú mẹ hoàn toàn, cần hỗ trợ về cách cho bú..."></textarea>
+      </div>
+    </div>
+    <div class="bp-item" style="border-left-color:var(--pink-dark);background:linear-gradient(135deg,#fff,var(--pink-light));">
+      <div class="bp-icon">💌</div>
+      <div style="flex:1;">
+        <div class="bp-label">⭐ Lời nhắn gửi em bé từ ba/mẹ 💕</div>
+        <textarea class="bp-input" placeholder="Viết điều bạn muốn nói với em bé đang trong bụng..." style="min-height:80px;border-color:var(--pink);"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- 5. KANGAROO CARE -->
+<section id="kangaroo">
+  <div class="section-title"><span class="icon">👶</span> Tiếp Xúc Mẹ-Con Sớm (Kangaroo Care)</div>
+  <div class="divider pink"></div>
+
+  <div class="kangaroo-visual">
+    <!-- SVG Kangaroo Care illustration -->
+    <svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;display:block;margin:0 auto 20px;">
+      <!-- Mom body -->
+      <ellipse cx="150" cy="160" rx="60" ry="50" fill="#f9c6d8" />
+      <!-- Mom head -->
+      <circle cx="150" cy="95" r="35" fill="#fde8c8" />
+      <!-- Hair -->
+      <ellipse cx="150" cy="70" rx="35" ry="20" fill="#5d4037" />
+      <!-- Eyes -->
+      <circle cx="140" cy="95" r="4" fill="#333" />
+      <circle cx="160" cy="95" r="4" fill="#333" />
+      <circle cx="141" cy="94" r="1.5" fill="#fff" />
+      <circle cx="161" cy="94" r="1.5" fill="#fff" />
+      <!-- Smile -->
+      <path d="M 142 106 Q 150 114 158 106" stroke="#c0392b" stroke-width="2" fill="none" stroke-linecap="round" />
+      <!-- Baby on chest -->
+      <circle cx="150" cy="145" r="20" fill="#ffe0b2" />
+      <!-- Baby eyes closed (sleeping) -->
+      <path d="M 144 143 Q 147 141 150 143" stroke="#333" stroke-width="1.5" fill="none" />
+      <path d="M 150 143 Q 153 141 156 143" stroke="#333" stroke-width="1.5" fill="none" />
+      <!-- Baby mouth -->
+      <path d="M 147 149 Q 150 152 153 149" stroke="#e57373" stroke-width="1.5" fill="none" />
+      <!-- Arms around baby -->
+      <path d="M 100 140 Q 110 155 130 155" stroke="#f9c6d8" stroke-width="14" fill="none" stroke-linecap="round" />
+      <path d="M 200 140 Q 190 155 170 155" stroke="#f9c6d8" stroke-width="14" fill="none" stroke-linecap="round" />
+      <!-- Heart -->
+      <text x="150" y="50" text-anchor="middle" font-size="18">💗</text>
+      <!-- Label -->
+      <text x="150" y="210" text-anchor="middle" font-size="12" fill="#e84393" font-weight="bold">Da kề da · Skin-to-Skin</text>
+    </svg>
+
+    <div class="grid2" style="text-align:left;margin-top:8px;">
+      <div class="stat-box">
+        <div class="stat-num">0.1%</div>
+        <div class="stat-label">Rủi ro ngừng thở đột ngột — được theo dõi liên tục</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">10 tháng</div>
+        <div class="stat-label">Em bé sống trong tử cung trước khi gặp thế giới bên ngoài</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card green" style="margin-top:16px;">
+    <div style="font-weight:700;font-size:1rem;margin-bottom:14px;color:var(--green);">🌿 Lợi ích của Kangaroo Care</div>
+    <div class="steps">
+      <div class="step-item">
+        <div class="step-num" style="background:var(--green);">1</div>
+        <div class="step-content">
+          <div class="step-title">Kích thích Oxytocin</div>
+          <div class="step-body">Hormone giúp tử cung co hồi và kích thích tiết sữa mẹ</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num" style="background:var(--blue);">2</div>
+        <div class="step-content">
+          <div class="step-title">Ổn định nhịp tim & hơi thở bé</div>
+          <div class="step-body">Hơi ấm từ ngực mẹ giúp điều hòa nhiệt độ và nhịp thở</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num" style="background:var(--purple);">3</div>
+        <div class="step-content">
+          <div class="step-title">Gắn kết tình cảm</div>
+          <div class="step-body">Kích hoạt phản xạ tìm vú, hỗ trợ bắt đầu cho bú sớm</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert warning" style="margin-top:8px;">
+    <span class="alert-icon">📋</span>
+    <div class="alert-text"><strong>Quyền lựa chọn của gia đình:</strong> Sau khi đọc thông tin, việc có thực hiện Kangaroo Care hay không hoàn toàn do gia đình quyết định. Nhân viên y tế sẽ theo dõi liên tục trong suốt quá trình.</div>
+  </div>
+</section>
+
+<!-- 6. SÀNG LỌC SƠ SINH -->
+<section id="sang-loc" style="background:var(--purple-light);max-width:100%;padding:40px 0;">
+<div style="max-width:900px;margin:0 auto;padding:0 20px;">
+  <div class="section-title"><span class="icon">🔬</span> Sàng Lọc Sơ Sinh</div>
+  <div class="divider purple"></div>
+
+  <div class="card purple">
+    <div style="font-weight:700;font-size:1rem;margin-bottom:8px;">🦻 Sàng Lọc Thính Lực (ABR)</div>
+    <p style="font-size:0.93rem;color:#555;">Ước tính <strong>1/500–1.000 trẻ sơ sinh</strong> có vấn đề về thính lực. Nếu phát hiện sớm và hỗ trợ kịp thời, trẻ có thể phát triển ngôn ngữ bình thường.</p>
+    <div class="flow" style="margin-top:14px;">
+      <div class="flow-node" style="background:var(--purple);">Tự động ABR</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node green">Bình thường</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node" style="background:var(--green);">Xuất viện ✓</div>
+    </div>
+    <div class="flow">
+      <div class="flow-node" style="background:var(--purple);">Tự động ABR</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node pink">Cần kiểm tra lại</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node" style="background:#e67e22;">Cơ sở chuyên khoa</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node" style="background:var(--blue);">Kết quả & hỗ trợ</div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px;">
+    <div style="font-weight:700;font-size:1rem;margin-bottom:14px;">🧬 Các Bệnh Sàng Lọc Mở Rộng (từ 2024)</div>
+    <div class="disease-grid">
+      <div class="disease-card">
+        <div class="d-icon">🛡️</div>
+        <div class="d-name">SCID</div>
+        <div class="d-full">Thiếu hụt miễn dịch kết hợp nghiêm trọng<br><em>1/50.000 trẻ</em></div>
+      </div>
+      <div class="disease-card">
+        <div class="d-icon">🦠</div>
+        <div class="d-name">BCD</div>
+        <div class="d-full">Giảm tế bào B<br><em>Dễ nhiễm virus</em></div>
+      </div>
+      <div class="disease-card">
+        <div class="d-icon">💪</div>
+        <div class="d-name">SMA</div>
+        <div class="d-full">Teo cơ tủy sống<br><em>Điều trị sớm rất hiệu quả</em></div>
+      </div>
+      <div class="disease-card">
+        <div class="d-icon">⚡</div>
+        <div class="d-name">Pompe</div>
+        <div class="d-full">Tích lũy glycogen<br><em>1/40.000 trẻ</em></div>
+      </div>
+      <div class="disease-card">
+        <div class="d-icon">🔑</div>
+        <div class="d-name">MPS1</div>
+        <div class="d-full">Mucopolysaccharidosis loại I</div>
+      </div>
+      <div class="disease-card">
+        <div class="d-icon">🔐</div>
+        <div class="d-name">MPS2</div>
+        <div class="d-full">Mucopolysaccharidosis loại II</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert success" style="margin-top:16px;">
+    <span class="alert-icon">✅</span>
+    <div class="alert-text"><strong>Chi phí xét nghiệm: Miễn phí</strong> — Dùng cùng mẫu máu sàng lọc thông thường, không cần lấy thêm máu cho bé. Dữ liệu được mã hóa, bảo mật cá nhân.</div>
+  </div>
+</div>
+</section>
+
+<!-- 7. ĐỒ CẦN MANG -->
+<section id="do-mang">
+  <div class="section-title"><span class="icon">🎒</span> Đồ Cần Mang Khi Nhập Viện</div>
+  <div class="divider blue"></div>
+
+  <div class="alert danger">
+    <span class="alert-icon">👟</span>
+    <div class="alert-text"><strong>Quan trọng:</strong> Đến viện nhập viện hãy đi <strong>giày sneaker hoặc giày bít mũi và gót</strong> (phòng trường hợp di tản khẩn cấp)!</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card blue">
+      <div style="font-weight:700;margin-bottom:12px;color:var(--blue);">📋 Giấy tờ & Tài liệu</div>
+      <ul class="checklist">
+        <li onclick="toggle(this)"><input type="checkbox"> <span>Sổ khám thai, phiếu hỗ trợ</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"> <span>Thẻ bảo hiểm, thẻ bệnh nhân</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"> <span>Giấy thông báo nhập viện</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"> <span>Các đồng ý thư đã ký</span></li>
+      </ul>
+    </div>
+    <div class="card green">
+      <div style="font-weight:700;margin-bottom:12px;color:var(--green);">👚 Quần áo & Vật dụng</div>
+      <ul class="checklist">
+        <li onclick="toggle(this)"><input type="checkbox"> <span>Bộ quần áo thay (quần lót kiểu mở)</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"> <span>Áo lót cho con bú</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"> <span>Đồ dùng vệ sinh cá nhân</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"> <span>Khẩu trang</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid2" style="margin-top:16px;">
+    <div class="card yellow">
+      <div style="font-weight:700;margin-bottom:12px;color:#e67e22;">📱 Thiết bị điện tử</div>
+      <ul class="checklist">
+        <li onclick="toggle(this)"><input type="checkbox"> <span>Sạc điện thoại</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"> <span>Tai nghe (cho TV phòng lớn)</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div style="font-weight:700;margin-bottom:12px;color:var(--pink-dark);">🍬 Tiện ích khi sinh</div>
+      <ul class="checklist">
+        <li onclick="toggle(this)"><input type="checkbox"> <span>Đồ uống, bình hút nước</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"> <span>Bánh kẹo ăn từng ngụm nhỏ</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"> <span>Son dưỡng môi</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"> <span>Tất hoặc vớ ấm chân</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 8. ĐỒ BÉ -->
+<section id="do-be" style="background:linear-gradient(180deg,#fff9fc,#f0fff4);max-width:100%;padding:40px 0;">
+<div style="max-width:900px;margin:0 auto;padding:0 20px;">
+  <div class="section-title"><span class="icon">🍼</span> Đồ Dùng Cho Em Bé</div>
+  <div class="divider green"></div>
+
+  <div class="card green">
+    <div style="font-weight:700;margin-bottom:14px;color:var(--green);">✅ Đồ CẦN THIẾT phải có</div>
+    <ul class="checklist">
+      <li onclick="toggle(this)"><input type="checkbox"> <span>🌡️ Nhiệt kế</span></li>
+      <li onclick="toggle(this)"><input type="checkbox"> <span>🛁 Bộ đồ tắm: bồn, khăn tắm, khăn gạc, xà phòng hình bánh</span></li>
+      <li onclick="toggle(this)"><input type="checkbox"> <span>💆 Sữa dưỡng ẩm, dưỡng thể</span></li>
+      <li onclick="toggle(this)"><input type="checkbox"> <span>✂️ Kéo/dũa cắt móng tay cho bé</span></li>
+      <li onclick="toggle(this)"><input type="checkbox"> <span>👕 Móc quần áo em bé</span></li>
+      <li onclick="toggle(this)"><input type="checkbox"> <span>🍑 Tã (vải: cần thêm lớp lót)</span></li>
+      <li onclick="toggle(this)"><input type="checkbox"> <span>🛏 Chăn/mền mỏng</span></li>
+      <li onclick="toggle(this)"><input type="checkbox"> <span>👗 Quần áo: ngắn/dài tay, liền thân (~95 chiếc tùy mùa)</span></li>
+    </ul>
+  </div>
+
+  <div class="card blue" style="margin-top:16px;">
+    <div style="font-weight:700;margin-bottom:14px;color:var(--blue);">⭐ Đồ TIỆN LỢI nên có</div>
+    <ul class="checklist">
+      <li onclick="toggle(this)"><input type="checkbox"> <span>🍶 Bình sữa + đồ tiệt trùng</span></li>
+      <li onclick="toggle(this)"><input type="checkbox"> <span>🛡️ Tấm lót thấm nước (trên đệm)</span></li>
+      <li onclick="toggle(this)"><input type="checkbox"> <span>🌡️ Máy đo nhiệt độ phòng</span></li>
+      <li onclick="toggle(this)"><input type="checkbox"> <span>🗑️ Thùng rác đựng tã</span></li>
+      <li onclick="toggle(this)"><input type="checkbox"> <span>🧻 Giấy ướt</span></li>
+      <li onclick="toggle(this)"><input type="checkbox"> <span>🚗 Ghế ngồi ô tô cho trẻ em</span></li>
+      <li onclick="toggle(this)"><input type="checkbox"> <span>🤱 Gối cho con bú</span></li>
+    </ul>
+  </div>
+
+  <div class="card yellow" style="margin-top:16px;">
+    <div style="font-weight:700;margin-bottom:14px;color:#e67e22;">🛒 Mua khi cần</div>
+    <div class="badge-row">
+      <span class="tag">Băng vú (đệm sữa)</span>
+      <span class="tag">Gối em bé</span>
+      <span class="tag">Yếm ăn</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- 9. ĐỒ BỆNH VIỆN CHUẨN BỊ -->
+<section>
+  <div class="section-title"><span class="icon">🏨</span> Đồ Bệnh Viện Chuẩn Bị Sẵn</div>
+  <div class="divider pink"></div>
+  <div class="alert success">
+    <span class="alert-icon">🎁</span>
+    <div class="alert-text"><strong>Bệnh viện đã chuẩn bị sẵn — bạn không cần mang:</strong></div>
+  </div>
+  <div class="card">
+    <ul class="checklist">
+      <li><input type="checkbox" checked disabled> <span style="color:#aaa;text-decoration:line-through;">Băng vệ sinh sau sinh (1 túi)</span> <span class="tag green" style="font-size:0.75rem;">✓ BV phát</span></li>
+      <li><input type="checkbox" checked disabled> <span style="color:#aaa;text-decoration:line-through;">Băng vệ sinh S/M/L các loại</span> <span class="tag green" style="font-size:0.75rem;">✓ BV phát</span></li>
+      <li><input type="checkbox" checked disabled> <span style="color:#aaa;text-decoration:line-through;">Quần lót sau sinh</span> <span class="tag green" style="font-size:0.75rem;">✓ BV phát</span></li>
+      <li><input type="checkbox" checked disabled> <span style="color:#aaa;text-decoration:line-through;">Áo lót cho con bú</span> <span class="tag green" style="font-size:0.75rem;">✓ BV phát</span></li>
+      <li><input type="checkbox" checked disabled> <span style="color:#aaa;text-decoration:line-through;">Tã cho em bé (~72 miếng)</span> <span class="tag green" style="font-size:0.75rem;">✓ BV phát</span></li>
+      <li><input type="checkbox" checked disabled> <span style="color:#aaa;text-decoration:line-through;">Bộ amenity (bàn chải, dầu gội, sữa tắm...)</span> <span class="tag green" style="font-size:0.75rem;">✓ BV phát</span></li>
+      <li><input type="checkbox" checked disabled> <span style="color:#aaa;text-decoration:line-through;">Pyjama, khăn tắm, khăn mặt</span> <span class="tag blue" style="font-size:0.75rem;">✓ Cho mượn miễn phí</span></li>
+      <li><input type="checkbox" checked disabled> <span style="color:#aaa;text-decoration:line-through;">Máy sấy tóc</span> <span class="tag blue" style="font-size:0.75rem;">✓ Cho mượn</span></li>
+      <li><input type="checkbox" checked disabled> <span style="color:#aaa;text-decoration:line-through;">Gối cho con bú, đệm cho con bú</span> <span class="tag blue" style="font-size:0.75rem;">✓ Có sẵn trong phòng</span></li>
+    </ul>
+  </div>
+
+  <div class="card" style="border-left-color:var(--blue);margin-top:8px;">
+    <div style="font-weight:700;margin-bottom:12px;color:var(--blue);">🧳 Cần mang khi xuất viện</div>
+    <ul class="checklist">
+      <li onclick="toggle(this)"><input type="checkbox"> <span>Quần áo cho mẹ, đồ trang điểm</span></li>
+      <li onclick="toggle(this)"><input type="checkbox"> <span>Bộ quần áo em bé (lót + áo ngoài + chăn ủ)</span></li>
+      <li onclick="toggle(this)"><input type="checkbox"> <span>Ghế ngồi ô tô (nếu đi xe riêng)</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 10. TUẦN 36 -->
+<section id="tuan36" style="max-width:100%;padding:40px 0;background:#fffdf0;">
+<div style="max-width:900px;margin:0 auto;padding:0 20px;">
+  <div class="section-title"><span class="icon">📅</span> Checklist Sau Tuần 36</div>
+  <div class="divider yellow"></div>
+
+  <div class="week36">
+    <h3>🐣 Sau 36 tuần: Kiểm tra những mục này!</h3>
+    <div class="progress-check"><input type="checkbox" id="c1" onchange="updateWeek36()"><label for="c1">📦 Đã hoàn thiện đồ nhập viện</label></div>
+    <div class="progress-check"><input type="checkbox" id="c2" onchange="updateWeek36()"><label for="c2">💅 Đã cắt móng tay</label></div>
+    <div class="progress-check"><input type="checkbox" id="c3" onchange="updateWeek36()"><label for="c3">💍 Đã tháo nhẫn và trang sức</label></div>
+    <div class="progress-check"><input type="checkbox" id="c4" onchange="updateWeek36()"><label for="c4">🚗 Đã xác nhận phương tiện & thời gian di chuyển đến viện</label></div>
+    <div class="progress-check"><input type="checkbox" id="c5" onchange="updateWeek36()"><label for="c5">📋 Đã chuẩn bị & chia sẻ danh sách liên lạc khẩn cấp với gia đình</label></div>
+    <div class="progress-check"><input type="checkbox" id="c6" onchange="updateWeek36()"><label for="c6">👧 Đã xác nhận nơi gửi trẻ lớn khi mẹ đi sinh</label></div>
+    <div class="progress-check"><input type="checkbox" id="c7" onchange="updateWeek36()"><label for="c7">🍼 Đã chuẩn bị đủ đồ dùng em bé sau xuất viện</label></div>
+
+    <div style="margin-top:20px;">
+      <div style="font-size:0.9rem;color:#888;margin-bottom:6px;">Tiến độ chuẩn bị:</div>
+      <div style="background:#fff;border-radius:20px;height:24px;overflow:hidden;">
+        <div id="week36-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#e67e22,#f7c948);border-radius:20px;transition:width 0.5s;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.8rem;font-weight:700;"></div>
+      </div>
+      <div id="week36-msg" style="margin-top:8px;font-size:0.9rem;color:#888;text-align:center;"></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- 11. NỘI QUY BỆNH VIỆN -->
+<section>
+  <div class="section-title"><span class="icon">🏥</span> Nội Quy & Thông Tin Bệnh Viện</div>
+  <div class="divider blue"></div>
+
+  <div class="grid2">
+    <div class="card blue">
+      <div style="font-weight:700;margin-bottom:12px;color:var(--blue);">🕐 Giờ Thăm Bệnh</div>
+      <div class="timeline" style="padding-left:24px;">
+        <div class="timeline-item">
+          <div class="timeline-dot blue" style="left:-19px;width:18px;height:18px;font-size:0.7rem;">•</div>
+          <div><strong>14:00 – 20:00</strong> (Thứ 2–CN)</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot green" style="left:-19px;width:18px;height:18px;font-size:0.7rem;">•</div>
+          <div>Sau sinh: <strong>bạn đời + mẹ ruột</strong>, tối đa 3 người/lần</div>
+        </div>
+      </div>
+    </div>
+    <div class="card green">
+      <div style="font-weight:700;margin-bottom:12px;color:var(--green);">🍽️ Giờ Ăn</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div class="badge-row">
+          <span class="tag green">🌅 Sáng: 8:00</span>
+          <span class="tag green">☀️ Trưa: 12:00</span>
+        </div>
+        <div class="badge-row">
+          <span class="tag green">🌙 Tối: 18:00</span>
+          <span class="tag">🌛 Phụ đêm: 22:00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid3" style="margin-top:16px;">
+    <div class="stat-box">
+      <div class="stat-num" style="color:var(--blue);">🏦</div>
+      <div style="font-weight:700;margin:4px 0;">ATM</div>
+      <div class="stat-label">Tòa A, 1F<br>T2–T6: 9:00–18:00<br>T7: đến 15:00</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num" style="color:var(--green);">🏪</div>
+      <div style="font-weight:700;margin:4px 0;">Cửa Hàng</div>
+      <div class="stat-label">Tòa B, 1F<br>T2–T6: 8:45–17:00<br>T7: đến 16:30</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num" style="color:var(--pink-dark);">👔</div>
+      <div style="font-weight:700;margin:4px 0;">Giặt Ủi</div>
+      <div class="stat-label">1F tầng 10<br>Máy đồng xu<br>6:00–22:00</div>
+    </div>
+  </div>
+
+  <div class="alert warning" style="margin-top:16px;">
+    <span class="alert-icon">🚫</span>
+    <div class="alert-text">
+      <strong>Cấm trong bệnh viện:</strong>
+      Không mang nhiều tiền mặt/đồ quý · Cấm rượu · Cấm hút thuốc · Ra ngoài cần xin phép bác sĩ · Điện thoại dùng chế độ im lặng trong phòng (6:00–22:00)
+    </div>
+  </div>
+</section>
+
+<!-- 12. LIÊN LẠC -->
+<section id="lien-lac" style="max-width:100%;padding:40px 20px;">
+<div style="max-width:900px;margin:0 auto;">
+  <div class="section-title"><span class="icon">📞</span> Cách Liên Lạc Khi Chuyển Dạ</div>
+  <div class="divider pink"></div>
+
+  <div class="contact-box">
+    <div class="phone-label">📞 Số điện thoại chuyên dụng cho sinh đẻ</div>
+    <div class="phone">070-3032-7597</div>
+    <div style="font-size:0.9rem;opacity:0.85;">⚠️ Hãy gọi trực tiếp bằng số điện thoại của BẠN (không nhờ người khác gọi)</div>
+  </div>
+
+  <div class="card" style="margin-top:20px;">
+    <div style="font-weight:700;margin-bottom:16px;font-size:1rem;">📋 Thông tin cần nói khi gọi điện</div>
+    <div class="steps">
+      <div class="step-item"><div class="step-num">1</div><div class="step-content"><div class="step-title">Họ tên và số hồ sơ bệnh nhân</div></div></div>
+      <div class="step-item"><div class="step-num">2</div><div class="step-content"><div class="step-title">Lần đầu hay đã sinh con rồi</div></div></div>
+      <div class="step-item"><div class="step-num">3</div><div class="step-content"><div class="step-title">Ngày dự kiến sinh</div></div></div>
+      <div class="step-item"><div class="step-num">4</div><div class="step-content"><div class="step-title">Số lần chuyển dạ</div></div></div>
+      <div class="step-item"><div class="step-num">5</div><div class="step-content"><div class="step-title">Thời điểm bắt đầu cơn co + khoảng cách các cơn</div></div></div>
+      <div class="step-item"><div class="step-num">6</div><div class="step-content"><div class="step-title">Có / Không vỡ ối và ra máu</div></div></div>
+      <div class="step-item"><div class="step-num">7</div><div class="step-content"><div class="step-title">Có / Không cử động của thai</div></div></div>
+      <div class="step-item"><div class="step-num">8</div><div class="step-content"><div class="step-title">Điều lo lắng bác sĩ / y tá đã dặn dò</div></div></div>
+      <div class="step-item"><div class="step-num">9</div><div class="step-content"><div class="step-title">Thời gian di chuyển đến bệnh viện</div></div></div>
+    </div>
+  </div>
+
+  <div class="alert info" style="margin-top:12px;">
+    <span class="alert-icon">🚪</span>
+    <div class="alert-text">
+      <strong>Khi đến bệnh viện:</strong><br>
+      • Ban ngày: tiếp nhận tại Phòng khám Sản<br>
+      • Ban đêm: vào từ cửa ngoài giờ làm việc<br>
+      • Người đi cùng: tối đa <strong>1 người (bạn đời)</strong>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- 13. TOKYO BABY FIRST -->
+<section id="tokyo-baby" style="background:linear-gradient(135deg,#e8f1fb,#fff);max-width:100%;padding:40px 0;">
+<div style="max-width:900px;margin:0 auto;padding:0 20px;">
+  <div class="section-title"><span class="icon">🎁</span> Chương Trình Tokyo Baby First</div>
+  <div class="divider blue"></div>
+
+  <div class="card blue">
+    <div style="text-align:center;padding:10px 0;">
+      <div style="font-size:3rem;margin-bottom:8px;">🗼🎀</div>
+      <div style="font-weight:800;font-size:1.2rem;margin-bottom:8px;color:var(--blue);">あかちゃんファースト</div>
+      <div style="color:#555;font-size:0.93rem;margin-bottom:16px;">Hỗ trợ sinh con & nuôi dưỡng trẻ em tại Tokyo</div>
+      <div style="background:var(--blue-light);border-radius:10px;padding:12px;font-size:0.92rem;">
+        🌐 <strong>https://tokyobabyfirst.metro.tokyo.lg.jp</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2" style="margin-top:16px;">
+    <div class="card">
+      <div style="font-weight:700;margin-bottom:10px;">📅 Thời Hạn</div>
+      <div class="badge-row">
+        <span class="tag blue">Đăng ký: đến 31/08 (Lệnh hòa 8)</span>
+        <span class="tag">Điểm: 6 tháng sau đăng ký</span>
+      </div>
+    </div>
+    <div class="card green">
+      <div style="font-weight:700;margin-bottom:10px;">📦 Giao Hàng</div>
+      <div style="font-size:0.93rem;color:#555;">Sau đặt hàng <strong>5–10 ngày làm việc</strong></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:8px;">
+    <div style="font-weight:700;margin-bottom:14px;">📋 Hướng Dẫn Đăng Ký Lần Đầu</div>
+    <div class="timeline">
+      <div class="timeline-item"><div class="timeline-dot blue">1</div><div class="timeline-body">Truy cập URL hoặc quét mã QR</div></div>
+      <div class="timeline-item"><div class="timeline-dot green">2</div><div class="timeline-body">Đăng ký tài khoản → Nhập mã quà tặng</div></div>
+      <div class="timeline-item"><div class="timeline-dot pink">3</div><div class="timeline-body">Nhập email → Nhận mật khẩu một lần (OTP)</div></div>
+      <div class="timeline-item"><div class="timeline-dot yellow">4</div><div class="timeline-body">Điền thông tin cá nhân + địa chỉ giao hàng</div></div>
+      <div class="timeline-item"><div class="timeline-dot purple">5</div><div class="timeline-body">Chọn quà tặng từ danh sách & trả lời khảo sát</div></div>
+    </div>
+  </div>
+
+  <div class="contact-box" style="background:linear-gradient(135deg,var(--blue),#2980b9);margin-top:16px;">
+    <div class="phone-label">📞 Hotline hỗ trợ Tokyo Baby First (Miễn phí)</div>
+    <div class="phone" style="font-size:2rem;">0120-001-047</div>
+    <div style="font-size:0.88rem;opacity:0.85;">Giờ: 9:00–18:00 (trừ 12/29 – 1/4)</div>
+  </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div style="font-size:2rem;margin-bottom:12px;">🌸</div>
+  <strong>Bệnh Viện Tổng Hợp Makita · 牧田総合病院</strong><br>
+  〒144-8501 Tokyo, Ota-ku, Nishikamata 8-7-20 · Tel: 03-6428-7500<br><br>
+  <span style="opacity:0.6;font-size:0.82rem;">Tài liệu dịch từ bản gốc tiếng Nhật · Chỉ dùng để tham khảo · 07/05/2026</span>
+</footer>
+
+<script>
+// Falling petals
+const petalContainer = document.getElementById('petals');
+for (let i = 0; i < 18; i++) {
+  const p = document.createElement('div');
+  p.className = 'petal';
+  p.style.left = Math.random() * 100 + '%';
+  p.style.width = (10 + Math.random() * 14) + 'px';
+  p.style.height = (10 + Math.random() * 14) + 'px';
+  p.style.animationDuration = (6 + Math.random() * 10) + 's';
+  p.style.animationDelay = (Math.random() * 12) + 's';
+  p.style.opacity = 0.4 + Math.random() * 0.4;
+  petalContainer.appendChild(p);
+}
+
+// Toggle checklist
+function toggle(li) {
+  const cb = li.querySelector('input[type=checkbox]');
+  if (cb.disabled) return;
+  cb.checked = !cb.checked;
+  li.classList.toggle('done', cb.checked);
+}
+
+// Week 36 progress
+function updateWeek36() {
+  const checks = document.querySelectorAll('.progress-check input');
+  let done = 0;
+  checks.forEach(c => { if (c.checked) done++; });
+  const pct = Math.round(done / checks.length * 100);
+  const bar = document.getElementById('week36-bar');
+  bar.style.width = pct + '%';
+  bar.textContent = pct > 15 ? pct + '%' : '';
+  const msg = document.getElementById('week36-msg');
+  if (pct === 0) msg.textContent = '';
+  else if (pct < 50) msg.textContent = '💪 Tiếp tục chuẩn bị nhé!';
+  else if (pct < 100) msg.textContent = '🌟 Gần xong rồi, cố lên!';
+  else msg.textContent = '🎉 Hoàn tất! Bạn đã sẵn sàng rồi!';
+}
+
+// Animate bar chart on scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('[data-w]').forEach(b => {
+        b.style.width = b.dataset.w;
+      });
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.card').forEach(c => observer.observe(c));
+</script>
+</body>
+</html>
