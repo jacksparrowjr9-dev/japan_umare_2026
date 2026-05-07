@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emi's Family</title>
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --pink:    #f06292;
+      --pink-lt: #fce4ec;
+      --teal:    #26a69a;
+      --teal-lt: #e0f2f1;
+      --blue:    #1976d2;
+      --blue-lt: #e3f2fd;
+      --amber:   #f9a825;
+      --amber-lt:#fffde7;
+      --purple:  #7b1fa2;
+      --purple-lt:#f3e5f5;
+      --green:   #388e3c;
+      --green-lt:#e8f5e9;
+      --red:     #d32f2f;
+      --gray-50: #fafafa;
+      --gray-100:#f5f5f5;
+      --gray-200:#eeeeee;
+      --gray-500:#9e9e9e;
+      --gray-700:#616161;
+      --gray-900:#212121;
+      --shadow:  0 2px 12px rgba(0,0,0,.10);
+      --shadow-md:0 4px 24px rgba(0,0,0,.14);
+      --radius:  14px;
+      --radius-sm:8px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--gray-100);
+      color: var(--gray-900);
+      line-height: 1.65;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(135deg, #e91e8c 0%, #9c27b0 40%, #1976d2 100%);
+      color: #fff;
+      text-align: center;
+      padding: 64px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='28'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+    }
+    .hero-emoji { font-size: 72px; display: block; margin-bottom: 16px; position: relative; }
+    .hero h1 { font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 800; position: relative; line-height: 1.25; }
+    .hero p  { font-size: 1.05rem; opacity: .88; margin-top: 12px; position: relative; }
+    .hero-badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 24px; position: relative; }
+    .hero-badge {
+      background: rgba(255,255,255,.2);
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 999px;
+      padding: 5px 16px;
+      font-size: .85rem;
+      font-weight: 600;
+      backdrop-filter: blur(4px);
+    }
+
+    /* ===== NAV ===== */
+    .sticky-nav {
+      position: sticky; top: 0; z-index: 100;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,.12);
+      display: flex; gap: 0; overflow-x: auto;
+    }
+    .sticky-nav a {
+      flex: 1 0 auto;
+      text-align: center;
+      padding: 14px 18px;
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--gray-700);
+      white-space: nowrap;
+      border-bottom: 3px solid transparent;
+      transition: all .2s;
+    }
+    .sticky-nav a:hover { color: var(--pink); border-color: var(--pink); text-decoration: none; }
+
+    /* ===== LAYOUT ===== */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    .section { padding: 56px 0 40px; }
+    .section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 32px; }
+    .section-icon { font-size: 2rem; }
+    .section-header h2 { font-size: 1.55rem; font-weight: 800; }
+    .section-sub { color: var(--gray-700); font-size: .9rem; margin-top: 2px; }
+
+    /* ===== TASK CARDS ===== */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 22px;
+    }
+    .task-card {
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .task-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .card-header {
+      display: flex; align-items: center; gap: 14px;
+      padding: 18px 20px 14px;
+    }
+    .card-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.7rem; flex-shrink: 0;
+    }
+    .card-title { font-size: 1rem; font-weight: 700; line-height: 1.3; }
+    .card-badge {
+      display: inline-block; margin-top: 6px;
+      padding: 2px 10px; border-radius: 999px;
+      font-size: .75rem; font-weight: 700;
+    }
+    .card-body { padding: 0 20px 20px; }
+    .card-overview {
+      font-size: .875rem; color: var(--gray-700);
+      border-left: 3px solid var(--gray-200);
+      padding-left: 10px; margin-bottom: 14px;
+    }
+    .result-box {
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      font-size: .875rem;
+      margin-bottom: 14px;
+      display: flex; gap: 8px; align-items: flex-start;
+    }
+    .result-box .rib { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+    .result-amount { font-size: 1.25rem; font-weight: 800; display: block; }
+    .steps { list-style: none; }
+    .steps li {
+      display: flex; gap: 10px; font-size: .82rem;
+      margin-bottom: 7px; align-items: flex-start;
+    }
+    .step-num {
+      width: 22px; height: 22px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .7rem; font-weight: 700; flex-shrink: 0;
+      color: #fff;
+    }
+    details { margin-top: 12px; }
+    summary {
+      cursor: pointer; font-size: .8rem; font-weight: 600;
+      color: var(--blue); user-select: none;
+      list-style: none; display: flex; align-items: center; gap: 4px;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::before { content: '▶ '; font-size: .65rem; }
+    details[open] summary::before { content: '▼ '; }
+    .detail-content {
+      margin-top: 10px; font-size: .8rem;
+      color: var(--gray-700);
+    }
+    .cond-list { list-style: none; }
+    .cond-list li { display: flex; gap: 6px; margin-bottom: 5px; }
+    .cond-list li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+    .note-box {
+      background: var(--amber-lt);
+      border-left: 3px solid var(--amber);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 8px 12px;
+      font-size: .78rem; margin-top: 10px;
+    }
+
+    /* ===== COLORS per card ===== */
+    .c-pink   .card-header { background: var(--pink-lt); }
+    .c-pink   .card-icon   { background: var(--pink); color:#fff; }
+    .c-pink   .card-badge  { background: var(--pink); color:#fff; }
+    .c-pink   .result-box  { background: var(--pink-lt); border: 1px solid #f8bbd0; }
+    .c-pink   .step-num    { background: var(--pink); }
+    .c-pink   summary      { color: var(--pink); }
+
+    .c-teal   .card-header { background: var(--teal-lt); }
+    .c-teal   .card-icon   { background: var(--teal); color:#fff; }
+    .c-teal   .card-badge  { background: var(--teal); color:#fff; }
+    .c-teal   .result-box  { background: var(--teal-lt); border: 1px solid #b2dfdb; }
+    .c-teal   .step-num    { background: var(--teal); }
+    .c-teal   summary      { color: var(--teal); }
+
+    .c-blue   .card-header { background: var(--blue-lt); }
+    .c-blue   .card-icon   { background: var(--blue); color:#fff; }
+    .c-blue   .card-badge  { background: var(--blue); color:#fff; }
+    .c-blue   .result-box  { background: var(--blue-lt); border: 1px solid #bbdefb; }
+    .c-blue   .step-num    { background: var(--blue); }
+    .c-blue   summary      { color: var(--blue); }
+
+    .c-purple .card-header { background: var(--purple-lt); }
+    .c-purple .card-icon   { background: var(--purple); color:#fff; }
+    .c-purple .card-badge  { background: var(--purple); color:#fff; }
+    .c-purple .result-box  { background: var(--purple-lt); border: 1px solid #e1bee7; }
+    .c-purple .step-num    { background: var(--purple); }
+    .c-purple summary      { color: var(--purple); }
+
+    .c-green  .card-header { background: var(--green-lt); }
+    .c-green  .card-icon   { background: var(--green); color:#fff; }
+    .c-green  .card-badge  { background: var(--green); color:#fff; }
+    .c-green  .result-box  { background: var(--green-lt); border: 1px solid #c8e6c9; }
+    .c-green  .step-num    { background: var(--green); }
+    .c-green  summary      { color: var(--green); }
+
+    .c-amber  .card-header { background: var(--amber-lt); }
+    .c-amber  .card-icon   { background: var(--amber); color:#fff; }
+    .c-amber  .card-badge  { background: var(--amber); color:#fff; }
+    .c-amber  .result-box  { background: var(--amber-lt); border: 1px solid #fff176; }
+    .c-amber  .step-num    { background: var(--amber); }
+    .c-amber  summary      { color: #e65100; }
+
+    /* ===== JOURNEY TIMELINE ===== */
+    .journey { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 36px 28px; }
+    .journey-track {
+      display: flex; gap: 0;
+      position: relative;
+      overflow-x: auto;
+      padding-bottom: 12px;
+    }
+    .journey-track::before {
+      content: '';
+      position: absolute;
+      top: 32px; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--pink), var(--blue), var(--teal), var(--green));
+      border-radius: 2px;
+    }
+    .journey-stage { flex: 1 0 200px; padding: 0 12px; text-align: center; }
+    .stage-dot {
+      width: 64px; height: 64px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; margin: 0 auto 12px;
+      border: 4px solid #fff;
+      box-shadow: 0 0 0 4px currentColor, var(--shadow);
+    }
+    .stage-dot.s0 { background: var(--pink-lt); color: var(--pink); }
+    .stage-dot.s1 { background: var(--blue-lt); color: var(--blue); }
+    .stage-dot.s2 { background: var(--teal-lt); color: var(--teal); }
+    .stage-dot.s3 { background: var(--green-lt); color: var(--green); }
+    .stage-label { font-weight: 800; font-size: .9rem; margin-bottom: 6px; }
+    .stage-sub    { font-size: .75rem; color: var(--gray-700); margin-bottom: 12px; }
+    .stage-items { text-align: left; }
+    .stage-item {
+      display: flex; gap: 6px; font-size: .78rem;
+      margin-bottom: 6px; align-items: flex-start;
+      background: var(--gray-50); border-radius: 6px; padding: 5px 8px;
+    }
+    .stage-item .si { flex-shrink: 0; }
+
+    /* ===== DEADLINE TIMELINE ===== */
+    .dl-timeline { position: relative; padding-left: 32px; }
+    .dl-timeline::before {
+      content: ''; position: absolute; left: 10px; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--pink), var(--blue), var(--teal));
+      border-radius: 2px;
+    }
+    .dl-item { position: relative; margin-bottom: 24px; }
+    .dl-dot {
+      position: absolute; left: -27px; top: 8px;
+      width: 14px; height: 14px; border-radius: 50%;
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 2px currentColor;
+    }
+    .dl-dot.urgent { background: var(--red); color: var(--red); }
+    .dl-dot.normal { background: var(--blue); color: var(--blue); }
+    .dl-dot.future { background: var(--teal); color: var(--teal); }
+    .dl-card {
+      background: #fff; border-radius: var(--radius-sm);
+      box-shadow: var(--shadow); padding: 14px 18px;
+    }
+    .dl-date { font-size: .8rem; font-weight: 700; margin-bottom: 4px; }
+    .dl-title { font-size: .95rem; font-weight: 700; }
+    .dl-note  { font-size: .78rem; color: var(--gray-700); margin-top: 4px; }
+    .tag {
+      display: inline-block; padding: 2px 8px; border-radius: 999px;
+      font-size: .7rem; font-weight: 700; margin-left: 6px; vertical-align: middle;
+    }
+    .tag-urgent { background: #ffebee; color: var(--red); }
+    .tag-blue   { background: var(--blue-lt); color: var(--blue); }
+    .tag-teal   { background: var(--teal-lt); color: var(--teal); }
+
+    /* ===== INFO CARDS ===== */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 18px;
+    }
+    .info-card {
+      background: #fff; border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: 22px 20px;
+      border-top: 4px solid var(--blue);
+      transition: transform .2s;
+    }
+    .info-card:hover { transform: translateY(-2px); }
+    .info-card.ic-teal   { border-color: var(--teal); }
+    .info-card.ic-pink   { border-color: var(--pink); }
+    .info-card.ic-amber  { border-color: var(--amber); }
+    .info-card.ic-purple { border-color: var(--purple); }
+    .info-card-icon { font-size: 2.2rem; margin-bottom: 10px; }
+    .info-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .info-card p  { font-size: .82rem; color: var(--gray-700); margin-bottom: 8px; }
+    .info-tag-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+    .info-tag {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: var(--gray-100); border-radius: 6px;
+      padding: 3px 9px; font-size: .76rem; font-weight: 600;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .contact-card {
+      background: #fff; border-radius: var(--radius-sm);
+      box-shadow: var(--shadow); padding: 16px;
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .contact-ico { font-size: 1.8rem; flex-shrink: 0; }
+    .contact-name { font-size: .85rem; font-weight: 700; margin-bottom: 3px; }
+    .contact-num  { font-size: 1rem; font-weight: 800; color: var(--blue); }
+    .contact-hours{ font-size: .75rem; color: var(--gray-500); }
+    .contact-note { font-size: .72rem; margin-top: 3px; background: var(--pink-lt); border-radius: 4px; padding: 2px 6px; display: inline-block; color: var(--pink); font-weight: 600; }
+
+    /* ===== CHANGES TABLE ===== */
+    .changes-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+    .changes-table th {
+      background: var(--blue); color: #fff;
+      padding: 10px 14px; text-align: left; font-weight: 700;
+    }
+    .changes-table td { padding: 10px 14px; border-bottom: 1px solid var(--gray-200); }
+    .changes-table tr:last-child td { border-bottom: none; }
+    .changes-table tr:nth-child(even) td { background: var(--gray-50); }
+    .highlight-cell { font-weight: 700; color: var(--red); }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      text-align: center; padding: 36px 20px;
+      font-size: .82rem; color: var(--gray-500);
+      background: #fff; border-top: 1px solid var(--gray-200);
+      margin-top: 40px;
+    }
+
+    /* ===== SECTION BG ===== */
+    .bg-alt { background: var(--gray-50); }
+
+    @media (max-width: 600px) {
+      .hero { padding: 40px 16px 56px; }
+      .section { padding: 36px 0 28px; }
+      .journey-track { gap: 0; }
+      .journey-stage { min-width: 160px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero" id="top">
+  <span class="hero-emoji">🍀👶🏻</span>
+  <h1>Emi's Family<br>Quận Ota, Tokyo</h1>
+  <p>Tổng hợp toàn bộ quyền lợi & nhiệm vụ cần thực hiện dành cho mẹ bầu và gia đình có con nhỏ</p>
+  <div class="hero-badges">
+    <span class="hero-badge">🗓 Reiwa 7–8 (2025–2026)</span>
+    <span class="hero-badge">📍 大田区 Ota Ward</span>
+    <span class="hero-badge">🇻🇳 Tiếng Việt</span>
+  </div>
+</header>
+
+<!-- ===== STICKY NAV ===== -->
+<nav class="sticky-nav">
+  <a href="#tasks">✅ Nhiệm Vụ Cần Làm</a>
+  <a href="#journey">🗺 Hành Trình</a>
+  <a href="#deadline">⏰ Deadline</a>
+  <a href="#info">ℹ️ Thông Tin Hữu Ích</a>
+  <a href="#contact">📞 Liên Hệ</a>
+  <a href="#changes">🔄 Thay Đổi 2026</a>
+</nav>
+
+<!-- ===== SECTION 1: TASKS ===== -->
+<section class="section" id="tasks">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-icon">✅</span>
+      <div>
+        <h2>Nhiệm Vụ Cần Làm</h2>
+        <p class="section-sub">6 việc quan trọng cần thực hiện để nhận đầy đủ quyền lợi</p>
+      </div>
+    </div>
+
+    <div class="cards-grid">
+
+      <!-- CARD 1 -->
+      <div class="task-card c-pink">
+        <div class="card-header">
+          <div class="card-icon">🤰</div>
+          <div>
+            <div class="card-title">Đăng ký trợ cấp thai nghén lần 1</div>
+            <span class="card-badge">Khi mang thai</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="card-overview">Nhận 50.000 yên hỗ trợ chi phí thai kỳ từ quận Ota qua chuyển khoản ngân hàng</p>
+          <div class="result-box">
+            <span class="rib">💰</span>
+            <div><span class="result-amount">50.000 ¥</span>Chuyển thẳng vào tài khoản ngân hàng</div>
+          </div>
+          <ul class="steps">
+            <li><span class="step-num">1</span>Quét mã QR trên tờ rơi bằng điện thoại</li>
+            <li><span class="step-num">2</span>Điền đơn đăng ký online</li>
+            <li><span class="step-num">3</span>Nhập thông tin tài khoản ngân hàng để nhận tiền</li>
+          </ul>
+          <details>
+            <summary>Xem điều kiện & ghi chú</summary>
+            <div class="detail-content">
+              <ul class="cond-list">
+                <li>Đã đăng ký thai nghén tại Ota từ 1/4/2025</li>
+                <li>Đang có hộ khẩu tại quận Ota khi nộp đơn</li>
+              </ul>
+              <div class="note-box">⚠️ Nếu đã nhận lần 1 ở quận/tỉnh khác → <strong>không được nhận lại</strong> tại Ota</div>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="task-card c-teal">
+        <div class="card-header">
+          <div class="card-icon">🏥</div>
+          <div>
+            <div class="card-title">Sử dụng phiếu chăm sóc sau sinh</div>
+            <span class="card-badge">0–12 tháng sau sinh</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="card-overview">Dùng phiếu trong sổ để nhận hỗ trợ phục hồi thể chất, tư vấn cho con bú, nuôi dạy con</p>
+          <div class="result-box">
+            <span class="rib">🎫</span>
+            <div><span class="result-amount">500–1.500 ¥</span>Tự trả / lần (quận hỗ trợ phần còn lại)</div>
+          </div>
+          <ul class="steps">
+            <li><span class="step-num">1</span>Chọn loại: 🏠 Thăm nhà · 🏪 Ngoại trú · ☀️ Về ngày · 🌙 Lưu trú</li>
+            <li><span class="step-num">2</span>Tra cơ sở ủy thác trên web quận Ota</li>
+            <li><span class="step-num">3</span>Gọi điện đặt lịch trực tiếp với cơ sở</li>
+            <li><span class="step-num">4</span>Mang phiếu đến cơ sở vào ngày hẹn</li>
+          </ul>
+          <details>
+            <summary>Xem điều kiện & ghi chú</summary>
+            <div class="detail-content">
+              <ul class="cond-list">
+                <li>Đang đăng ký hộ khẩu tại Ota vào ngày sử dụng</li>
+                <li>Trong thời hạn 1 năm sau sinh</li>
+              </ul>
+              <div class="note-box">⚠️ Hủy lịch: liên hệ trước <strong>15:00 ngày hôm trước</strong>. Phiếu không chuyển nhượng.</div>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="task-card c-blue">
+        <div class="card-header">
+          <div class="card-icon">📱</div>
+          <div>
+            <div class="card-title">Đăng ký 018 Support</div>
+            <span class="card-badge">Ngay sau khi sinh</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="card-overview">Trợ cấp tiền mặt hàng tháng cho trẻ 0–18 tuổi từ chương trình của Tokyo</p>
+          <div class="result-box">
+            <span class="rib">💴</span>
+            <div><span class="result-amount">5.000 ¥/tháng</span>Tối đa 60.000 ¥/năm — đến khi bé 18 tuổi</div>
+          </div>
+          <ul class="steps">
+            <li><span class="step-num">1</span>Cài ứng dụng <strong>My Portal</strong> trên điện thoại</li>
+            <li><span class="step-num">2</span>Truy cập trang <strong>018 Support HP</strong></li>
+            <li><span class="step-num">3</span>Đăng ký bằng Thẻ My Number (マイナンバーカード)</li>
+            <li><span class="step-num">4</span>Hoàn tất trong <strong>15 ngày</strong> từ ngày khai sinh</li>
+          </ul>
+          <details>
+            <summary>Xem điều kiện & ghi chú</summary>
+            <div class="detail-content">
+              <ul class="cond-list">
+                <li>Trẻ từ 0–18 tuổi có hộ khẩu tại Tokyo</li>
+              </ul>
+              <div class="note-box">⚠️ Bé sinh 1/4–31/8/2025: hạn đăng ký đến <strong>15/9/2025</strong>. Có thể đăng ký đồng thời với Baby First qua 1 thủ tục!</div>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- CARD 4 -->
+      <div class="task-card c-purple">
+        <div class="card-header">
+          <div class="card-icon">🎁</div>
+          <div>
+            <div class="card-title">Đăng ký Baby First</div>
+            <span class="card-badge">Ngay sau khi sinh</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="card-overview">Nhận phiếu quà chọn đồ dùng cho bé hoặc dịch vụ chăm sóc trẻ từ danh mục</p>
+          <div class="result-box">
+            <span class="rib">🛍</span>
+            <div><span class="result-amount">130.000 ¥</span>Phiếu quà (Gift Card) + tối đa 30.000 ¥ bổ sung</div>
+          </div>
+          <ul class="steps">
+            <li><span class="step-num">1</span>Đăng ký đồng thời với 018 Support (1 thủ tục)</li>
+            <li><span class="step-num">2</span>Đăng ký tài khoản trang web Baby First</li>
+            <li><span class="step-num">3</span>Chọn hàng từ danh mục online</li>
+            <li><span class="step-num">4</span>Đặt mua trong <strong>vòng 6 tháng</strong> kể từ đăng ký</li>
+          </ul>
+          <details>
+            <summary>Xem điều kiện & ghi chú</summary>
+            <div class="detail-content">
+              <ul class="cond-list">
+                <li>Bé sinh từ 1/4/2025 tại Tokyo</li>
+                <li>Hộ khẩu tại Tokyo vào thời điểm sinh</li>
+              </ul>
+              <div class="note-box">⚠️ Hạn đăng ký tài khoản Baby First: <strong>31/8/2025</strong></div>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- CARD 5 -->
+      <div class="task-card c-green">
+        <div class="card-header">
+          <div class="card-icon">🏡</div>
+          <div>
+            <div class="card-title">Trợ cấp khám thai ngoại tỉnh / về quê</div>
+            <span class="card-badge">Áp dụng từ 1/4/2026</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="card-overview">Hoàn lại tiền khi khám thai ở cơ sở ngoài quận Ota (về quê sinh, bệnh viện ngoài hợp đồng)</p>
+          <div class="result-box">
+            <span class="rib">🔄</span>
+            <div><span class="result-amount">Hoàn một phần</span>Chi phí khám thai & khám thính giác trẻ sơ sinh</div>
+          </div>
+          <ul class="steps">
+            <li><span class="step-num">1</span>Giữ lại <strong>biên lai + bảng kê</strong> từ cơ sở y tế</li>
+            <li><span class="step-num">2</span>Tải đơn đăng ký trên web quận Ota</li>
+            <li><span class="step-num">3</span>Chuẩn bị bản sao sổ sức khỏe mẹ & bé</li>
+            <li><span class="step-num">4</span>Nộp trực tiếp hoặc gửi bưu điện đến Phòng Sức Khỏe</li>
+          </ul>
+          <details>
+            <summary>Xem điều kiện & ghi chú</summary>
+            <div class="detail-content">
+              <ul class="cond-list">
+                <li>Hộ khẩu tại Ota tại thời điểm khám</li>
+                <li>Khám tại cơ sở không ký hợp đồng với quận</li>
+                <li>Dùng sổ sức khỏe do quận Ota cấp</li>
+                <li>Áp dụng từ lần khám ngày 1/4/2026 trở đi</li>
+              </ul>
+              <div class="note-box">⚠️ Kỳ đặc biệt 1/4–30/9/2026 vẫn hỗ trợ dù đã nhận phiếu từ Ota trước đó</div>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- CARD 6 -->
+      <div class="task-card c-amber">
+        <div class="card-header">
+          <div class="card-icon">👶</div>
+          <div>
+            <div class="card-title">Trợ cấp khám sức khỏe 1 tháng tuổi</div>
+            <span class="card-badge">Sau khi bé 1 tháng tuổi</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="card-overview">Hoàn lại tiền khám định kỳ 1 tháng tuổi — miễn phí hoàn toàn từ tháng 10/2026</p>
+          <div class="result-box">
+            <span class="rib">🩺</span>
+            <div><span class="result-amount">Tối đa 6.000 ¥</span>Miễn phí 100% từ 1/10/2026</div>
+          </div>
+          <ul class="steps">
+            <li><span class="step-num">1</span>Đưa bé đi khám tại cơ sở y tế (từ 10/2026: xuất trình thư giới thiệu của quận)</li>
+            <li><span class="step-num">2</span>Giữ lại biên lai thanh toán</li>
+            <li><span class="step-num">3</span>Điền đơn đăng ký</li>
+            <li><span class="step-num">4</span>Gửi bưu điện đến Phòng Sức Khỏe Ota</li>
+          </ul>
+          <details>
+            <summary>Xem điều kiện & ghi chú</summary>
+            <div class="detail-content">
+              <ul class="cond-list">
+                <li>Bé sinh từ 1/4/2025</li>
+                <li>Bé và cha/mẹ cùng đăng ký hộ khẩu tại Ota</li>
+                <li>Khám chưa dùng bảo hiểm y tế thông thường</li>
+                <li>Kết quả ghi vào sổ sức khỏe mẹ & bé</li>
+              </ul>
+              <div class="note-box">⚠️ Hạn nộp: trong <strong>1 năm</strong> từ ngày khám, trước khi bé <strong>3 tuổi</strong></div>
+            </div>
+          </details>
+        </div>
+      </div>
+
+    </div><!-- /cards-grid -->
+  </div>
+</section>
+
+<!-- ===== SECTION 2: JOURNEY ===== -->
+<section class="section bg-alt" id="journey">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-icon">🗺</span>
+      <div>
+        <h2>Hành Trình Thai Sản & Nuôi Con</h2>
+        <p class="section-sub">4 giai đoạn — từ lúc mang thai đến khi bé lớn</p>
+      </div>
+    </div>
+
+    <div class="journey">
+      <div class="journey-track">
+
+        <div class="journey-stage">
+          <div class="stage-dot s0">🤰</div>
+          <div class="stage-label" style="color:var(--pink)">Giai đoạn 0</div>
+          <div class="stage-sub">Mang thai (妊娠中)</div>
+          <div class="stage-items">
+            <div class="stage-item"><span class="si">📋</span>Đăng ký thai nghén → nhận sổ sức khỏe</div>
+            <div class="stage-item"><span class="si">🎫</span>Nhận phiếu khám thai (妊婦健診受診票)</div>
+            <div class="stage-item"><span class="si">💰</span>Đăng ký trợ cấp <strong>50.000 ¥</strong></div>
+            <div class="stage-item"><span class="si">💬</span>Tư vấn trước sinh (GOCA: T2 & T6)</div>
+          </div>
+        </div>
+
+        <div class="journey-stage">
+          <div class="stage-dot s1">🍼</div>
+          <div class="stage-label" style="color:var(--blue)">Giai đoạn 1</div>
+          <div class="stage-sub">Ngay sau sinh (0–1 tháng)</div>
+          <div class="stage-items">
+            <div class="stage-item"><span class="si">📝</span>Khai sinh trong <strong>14 ngày</strong></div>
+            <div class="stage-item"><span class="si">🏠</span>Đăng ký hộ khẩu cho bé</div>
+            <div class="stage-item"><span class="si">📱</span>Đăng ký <strong>018 Support + Baby First</strong></div>
+            <div class="stage-item"><span class="si">👂</span>Khám thính giác trẻ sơ sinh</div>
+            <div class="stage-item"><span class="si">🎫</span>Bắt đầu dùng phiếu chăm sóc sau sinh</div>
+          </div>
+        </div>
+
+        <div class="journey-stage">
+          <div class="stage-dot s2">🩺</div>
+          <div class="stage-label" style="color:var(--teal)">Giai đoạn 2</div>
+          <div class="stage-sub">Bé 1 tháng tuổi</div>
+          <div class="stage-items">
+            <div class="stage-item"><span class="si">🏥</span>Khám sức khỏe 1 tháng tuổi</div>
+            <div class="stage-item"><span class="si">📬</span>Nộp đơn hoàn tiền khám (tối đa 6.000 ¥)</div>
+            <div class="stage-item"><span class="si">🛍</span>Đặt hàng Baby First trong 6 tháng</div>
+          </div>
+        </div>
+
+        <div class="journey-stage">
+          <div class="stage-dot s3">🌱</div>
+          <div class="stage-label" style="color:var(--green)">Giai đoạn 3</div>
+          <div class="stage-sub">Từ 1–3 tháng & xa hơn</div>
+          <div class="stage-items">
+            <div class="stage-item"><span class="si">💉</span>Tiêm phòng theo lịch (miễn phí)</div>
+            <div class="stage-item"><span class="si">📅</span>Khám định kỳ: 3 tháng, 6 tháng, 1 tuổi…</div>
+            <div class="stage-item"><span class="si">💴</span>Tiếp tục nhận 018 Support 5.000 ¥/tháng</div>
+          </div>
+        </div>
+
+      </div><!-- /journey-track -->
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 3: DEADLINE TIMELINE ===== -->
+<section class="section" id="deadline">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-icon">⏰</span>
+      <div>
+        <h2>Timeline Deadline Quan Trọng</h2>
+        <p class="section-sub">Ghi nhớ các mốc thời gian để không bỏ lỡ quyền lợi</p>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px">
+      <div>
+        <h3 style="font-size:.9rem;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em;margin-bottom:20px">🔴 Năm 2025</h3>
+        <div class="dl-timeline">
+          <div class="dl-item">
+            <div class="dl-dot urgent"></div>
+            <div class="dl-card">
+              <div class="dl-date" style="color:var(--red)">⚡ Trong 15 ngày từ khi khai sinh</div>
+              <div class="dl-title">Đăng ký 018 Support + Baby First <span class="tag tag-urgent">Gấp</span></div>
+              <div class="dl-note">Bé sinh sau 1/9/2025 → hạn 15 ngày kể từ ngày khai sinh</div>
+            </div>
+          </div>
+          <div class="dl-item">
+            <div class="dl-dot urgent"></div>
+            <div class="dl-card">
+              <div class="dl-date" style="color:var(--red)">15/9/2025</div>
+              <div class="dl-title">Đăng ký 018 Support (bé sinh 1/4–31/8/2025) <span class="tag tag-urgent">Deadline</span></div>
+              <div class="dl-note">Quá hạn sẽ mất quyền nhận đợt cấp đầu tiên</div>
+            </div>
+          </div>
+          <div class="dl-item">
+            <div class="dl-dot urgent"></div>
+            <div class="dl-card">
+              <div class="dl-date" style="color:var(--red)">31/8/2025</div>
+              <div class="dl-title">Đăng ký tài khoản Baby First <span class="tag tag-urgent">Deadline</span></div>
+              <div class="dl-note">Sau đăng ký, có 6 tháng để chọn & đặt hàng từ danh mục</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="font-size:.9rem;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em;margin-bottom:20px">🔵 Năm 2026 trở đi</h3>
+        <div class="dl-timeline">
+          <div class="dl-item">
+            <div class="dl-dot normal"></div>
+            <div class="dl-card">
+              <div class="dl-date" style="color:var(--blue)">1/4/2026</div>
+              <div class="dl-title">Trợ cấp khám thai ngoại tỉnh bắt đầu áp dụng <span class="tag tag-blue">Mới</span></div>
+              <div class="dl-note">Kỳ đặc biệt 1/4–30/9/2026 hỗ trợ hồi tố</div>
+            </div>
+          </div>
+          <div class="dl-item">
+            <div class="dl-dot normal"></div>
+            <div class="dl-card">
+              <div class="dl-date" style="color:var(--blue)">1/7/2026 → Cấp tháng 8/2026</div>
+              <div class="dl-title">018 Support — Đợt cấp 1 <span class="tag tag-blue">Đăng ký trước</span></div>
+              <div class="dl-note">Đăng ký trước ngày 1/7 để nhận tiền vào tháng 8</div>
+            </div>
+          </div>
+          <div class="dl-item">
+            <div class="dl-dot future"></div>
+            <div class="dl-card">
+              <div class="dl-date" style="color:var(--teal)">1/10/2026 🎉</div>
+              <div class="dl-title">Khám 1 tháng tuổi MIỄN PHÍ hoàn toàn <span class="tag tag-teal">Nâng cấp</span></div>
+              <div class="dl-note">Từ ngày này không cần nộp đơn hoàn tiền nữa</div>
+            </div>
+          </div>
+          <div class="dl-item">
+            <div class="dl-dot normal"></div>
+            <div class="dl-card">
+              <div class="dl-date" style="color:var(--blue)">1/11/2026 → Cấp tháng 12/2026</div>
+              <div class="dl-title">018 Support — Đợt cấp 2</div>
+              <div class="dl-note">Đăng ký trước ngày 1/11</div>
+            </div>
+          </div>
+          <div class="dl-item">
+            <div class="dl-dot future"></div>
+            <div class="dl-card">
+              <div class="dl-date" style="color:var(--teal)">Trước khi bé 3 tuổi</div>
+              <div class="dl-title">Hạn nộp đơn trợ cấp khám 1 tháng tuổi</div>
+              <div class="dl-note">Tối đa 1 năm từ ngày khám và không được quá sinh nhật 3 tuổi của bé</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 4: INFO ===== -->
+<section class="section bg-alt" id="info">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-icon">ℹ️</span>
+      <div>
+        <h2>Thông Tin Hữu Ích</h2>
+        <p class="section-sub">Các nguồn hỗ trợ & công cụ cần biết</p>
+      </div>
+    </div>
+
+    <div class="info-grid">
+
+      <div class="info-card ic-pink">
+        <div class="info-card-icon">🌍</div>
+        <h3>Quầy Tư Vấn Đa Ngôn Ngữ GOCA</h3>
+        <p>Tư vấn miễn phí bằng tiếng Việt, tiếng Anh, Trung, Tagalog, Nepal. Cả tư vấn pháp lý với luật sư.</p>
+        <div class="info-tag-row">
+          <span class="info-tag">🇻🇳 T2 &amp; T6</span>
+          <span class="info-tag">⏰ 10:00–17:00</span>
+          <span class="info-tag">📞 03-6424-4924</span>
+        </div>
+        <div style="margin-top:10px;font-size:.78rem;color:var(--gray-700)">
+          📍 Kamata 4-16-8, Tầng 2, Trung tâm Giao lưu Quốc tế Ota<br>
+          ⚖️ Luật sư: CN tuần 1 &amp; 3 (13:00–17:00) — <strong>cần đặt trước</strong>
+        </div>
+      </div>
+
+      <div class="info-card ic-teal">
+        <div class="info-card-icon">🏛</div>
+        <h3>Phòng Xây Dựng Sức Khỏe (健康づくり課)</h3>
+        <p>Đầu mối chính tiếp nhận tất cả thủ tục thai sản, chăm sóc bé tại quận Ota.</p>
+        <div class="info-tag-row">
+          <span class="info-tag">⏰ T2–T6 8:30–17:00</span>
+          <span class="info-tag">📞 03-5744-1661</span>
+        </div>
+        <div style="margin-top:10px;font-size:.78rem;color:var(--gray-700)">
+          📍 Kamata 5-13-14, Tòa nhà Trung tâm Hành chính Ota, Tầng 6, Phòng 12
+        </div>
+      </div>
+
+      <div class="info-card ic-amber">
+        <div class="info-card-icon">📒</div>
+        <h3>Sổ Sức Khỏe Mẹ & Bé (母子健康手帳)</h3>
+        <p>Tài liệu bắt buộc cho hầu hết thủ tục. Nhận tại quận khi đăng ký thai nghén. Mang theo mỗi lần khám.</p>
+        <div class="info-tag-row">
+          <span class="info-tag">✅ Nhận miễn phí</span>
+          <span class="info-tag">📋 Bắt buộc mang theo</span>
+        </div>
+        <div style="margin-top:10px;font-size:.78rem;color:var(--gray-700)">
+          ⚠️ Cần bản photo khi nộp đơn hoàn tiền. Không dùng sổ nhận ở nơi khác cho một số chương trình.
+        </div>
+      </div>
+
+      <div class="info-card ic-purple">
+        <div class="info-card-icon">💳</div>
+        <h3>Thẻ My Number (マイナンバーカード)</h3>
+        <p>Dùng để đăng ký online 018 Support + Baby First nhanh chóng mà không cần đến văn phòng.</p>
+        <div class="info-tag-row">
+          <span class="info-tag">📱 Qua My Portal App</span>
+          <span class="info-tag">⚡ Đăng ký nhanh</span>
+        </div>
+        <div style="margin-top:10px;font-size:.78rem;color:var(--gray-700)">
+          💡 Chưa có thẻ? Vẫn có thể đăng ký bằng phương thức khác (đến nộp trực tiếp hoặc theo hướng dẫn online).
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-icon">🏥</div>
+        <h3>Trung Tâm Y Tế Khu Vực</h3>
+        <p>Hỗ trợ tư vấn thai sản, phát sổ sức khỏe, khám định kỳ theo khu vực cư trú.</p>
+        <div style="margin-top:10px;font-size:.8rem">
+          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--gray-200)"><span>🏙 Kamata (蒲田)</span><strong>03-5713-1701</strong></div>
+          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--gray-200)"><span>🌊 Omori (大森)</span><strong>03-5764-0661</strong></div>
+          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--gray-200)"><span>🏘 Chofu (調布)</span><strong>03-3726-4145</strong></div>
+          <div style="display:flex;justify-content:space-between;padding:5px 0"><span>✈️ Yaguchi/Haneda</span><strong>03-3743-4161</strong></div>
+        </div>
+      </div>
+
+      <div class="info-card ic-teal">
+        <div class="info-card-icon">🌐</div>
+        <h3>Trang Web Quận Ota</h3>
+        <p>Tải mẫu đơn, tra cơ sở chăm sóc sau sinh, xem thông tin mới nhất về các chương trình hỗ trợ.</p>
+        <div class="info-tag-row">
+          <span class="info-tag">📄 Mẫu đơn miễn phí</span>
+          <span class="info-tag">🏥 Danh sách cơ sở</span>
+        </div>
+        <div style="margin-top:10px;font-size:.78rem;color:var(--gray-700)">
+          🔍 Tra Google: <code>大田区産後ケア</code> hoặc <code>大田区018サポート</code><br>
+          ⚠️ Thông tin có thể thay đổi — luôn kiểm tra web trước khi nộp đơn.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 5: CONTACT ===== -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-icon">📞</span>
+      <div>
+        <h2>Danh Bạ Liên Hệ Nhanh</h2>
+        <p class="section-sub">Lưu lại để gọi khi cần</p>
+      </div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-ico">🏛</div>
+        <div>
+          <div class="contact-name">Phòng Xây Dựng Sức Khỏe</div>
+          <div class="contact-num">03-5744-1661</div>
+          <div class="contact-hours">T2–T6 · 8:30–17:00</div>
+          <span class="contact-note">Đầu mối chính</span>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-ico">🌍</div>
+        <div>
+          <div class="contact-name">GOCA — Tư vấn tiếng Việt</div>
+          <div class="contact-num">03-6424-4924</div>
+          <div class="contact-hours">T2–T6 · 10:00–17:00</div>
+          <span class="contact-note">🇻🇳 T2 & T6</span>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-ico">🏙</div>
+        <div>
+          <div class="contact-name">Trung tâm Kamata (蒲田)</div>
+          <div class="contact-num">03-5713-1701</div>
+          <div class="contact-hours">Khu vực Kamata</div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-ico">🌊</div>
+        <div>
+          <div class="contact-name">Trung tâm Omori (大森)</div>
+          <div class="contact-num">03-5764-0661</div>
+          <div class="contact-hours">Khu vực Omori</div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-ico">🏘</div>
+        <div>
+          <div class="contact-name">Trung tâm Chofu (調布)</div>
+          <div class="contact-num">03-3726-4145</div>
+          <div class="contact-hours">Khu vực Chofu</div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-ico">✈️</div>
+        <div>
+          <div class="contact-name">Trung tâm Yaguchi/Haneda</div>
+          <div class="contact-num">03-3743-4161</div>
+          <div class="contact-hours">Khu vực Yaguchi · Haneda</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 6: CHANGES 2026 ===== -->
+<section class="section bg-alt" id="changes">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-icon">🔄</span>
+      <div>
+        <h2>Thay Đổi Chính Sách Năm 2026 (Reiwa 8)</h2>
+        <p class="section-sub">Những điểm mới cần nắm so với năm 2025</p>
+      </div>
+    </div>
+    <div style="background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden">
+      <table class="changes-table">
+        <thead>
+          <tr>
+            <th>Chính sách</th>
+            <th>Trước đây</th>
+            <th>Từ 2026 — Thay đổi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>🩺 Khám sức khỏe 1 tháng tuổi</td>
+            <td>Tự trả một phần, hoàn tiền tối đa 6.000 ¥ sau khi nộp đơn</td>
+            <td class="highlight-cell">✅ Từ 1/10/2026: MIỄN PHÍ hoàn toàn — không cần nộp đơn hoàn tiền nữa</td>
+          </tr>
+          <tr>
+            <td>🏡 Trợ cấp khám thai ngoại tỉnh</td>
+            <td>Chưa có chế độ hoàn tiền</td>
+            <td class="highlight-cell">✅ Áp dụng từ 1/4/2026 — kỳ đặc biệt 1/4–30/9/2026 hỗ trợ hồi tố</td>
+          </tr>
+          <tr>
+            <td>📱 Phương thức đăng ký</td>
+            <td>Đến nộp trực tiếp hoặc bưu điện</td>
+            <td class="highlight-cell">🆕 Ưu tiên dùng điện thoại + Thẻ My Number qua My Portal</td>
+          </tr>
+          <tr>
+            <td>🎁 018 Support + Baby First</td>
+            <td>Có thể phải đăng ký riêng lẻ</td>
+            <td class="highlight-cell">🆕 Đăng ký đồng thời cả hai qua <strong>1 thủ tục duy nhất</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Alert box -->
+    <div style="background:linear-gradient(135deg,var(--pink-lt),var(--blue-lt));border-radius:var(--radius);padding:24px 28px;margin-top:24px;display:flex;gap:16px;align-items:flex-start">
+      <span style="font-size:2.5rem;flex-shrink:0">💡</span>
+      <div>
+        <strong style="font-size:1rem">Lưu ý quan trọng</strong>
+        <p style="font-size:.87rem;margin-top:6px;color:var(--gray-700)">Tất cả thông tin dựa trên tài liệu phát tại buổi tư vấn quận Ota. Chính sách có thể thay đổi — hãy kiểm tra trang web chính thức hoặc liên hệ <strong>03-5744-1661</strong> trước khi thực hiện thủ tục. Nếu cần hỗ trợ bằng tiếng Việt, gọi GOCA <strong>03-6424-4924</strong> vào Thứ Hai hoặc Thứ Sáu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div>🍀 Tổng hợp từ tài liệu phát tại quận Ota (大田区), Tokyo · Reiwa 7–8 (2025–2026)</div>
+  <div style="margin-top:6px">Mọi thắc mắc: Phòng Sức Khỏe 📞 <strong>03-5744-1661</strong> · GOCA Tiếng Việt 📞 <strong>03-6424-4924</strong></div>
+</footer>
+
+</body>
+</html>
